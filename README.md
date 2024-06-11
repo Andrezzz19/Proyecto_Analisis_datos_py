@@ -93,10 +93,13 @@ También podemos agregar un nuevo Tweet manualmente donde puede o no variar el r
 # Agregar el nuevo tweet al conjunto de datos
 nuevo_tweet = "Este es un nuevo tweet sobre COVID-19. #COVID19 #nuevo"
 nuevo_tweet_sentimiento = get_sentimientos(nuevo_tweet)
+
 # Crear un nuevo DataFrame con el nuevo tweet
 nuevo_tweet_df = pd.DataFrame({'text': [nuevo_tweet], 'Sentimiento': [nuevo_tweet_sentimiento]})
+
 # Concatenar el nuevo DataFrame con el conjunto de datos existente
 datos = pd.concat([datos, nuevo_tweet_df], ignore_index=True)
+
 # Recalcular los porcentajes
 sentimiento_counts = datos['Sentimiento'].value_counts()
 total_tweets = len(datos)
@@ -105,6 +108,7 @@ porcentaje_negativo = (sentimiento_counts['Negativo'] / total_tweets) * 100
 porcentaje_neutral = (sentimiento_counts['Neutral'] / total_tweets) * 100
 etiquetas = ['Positivo', 'Negativo', 'Neutral']
 porcentajes = [porcentaje_positivo, porcentaje_negativo, porcentaje_neutral]
+
 # Crear el gráfico circular actualizado
 plt.figure(figsize=(8, 6))
 plt.pie(porcentajes, labels=etiquetas, autopct='%1.1f%%', startangle=140)
